@@ -1,0 +1,132 @@
+/* ملف إصلاح مشاكل ظهور المحتوى */
+
+/* إصلاح أساسي لضمان ظهور جميع العناصر */
+.content,
+.content section,
+.content article,
+.lesson-container,
+article,
+main {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+    transform: none !important;
+    animation: none !important;
+}
+
+/* إصلاح مشاكل التنسيق */
+.content {
+    min-height: auto !important;
+    margin-right: 300px;
+    padding: 32px;
+}
+
+/* إصلاح للشاشات الصغيرة */
+@media (max-width: 768px) {
+    .content {
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+        padding: 16px !important;
+    }
+    
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+    }
+}
+
+/* إصلاح مشاكل الأنيميشن */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* إصلاح إضافي للعناصر المخفية */
+[style*="opacity: 0"],
+[style*="visibility: hidden"],
+[style*="display: none"] {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+/* تأكد من ظهور النصوص */
+h1, h2, h3, h4, h5, h6, p, div, span, article, section {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* إصلاح مشاكل التحريك */
+.animate-on-scroll,
+.fade-in,
+.slide-in {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+}
+
+/* إصلاح مشاكل الفليكس والجريد */
+.flex-container,
+.grid-container {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* إصلاح للعناصر التفاعلية */
+button,
+.try-btn,
+.copy-btn,
+a {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: inline-block !important;
+}
+
+/* إصلاح خاص للكود */
+pre,
+code,
+.example {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+/* إصلاح نهائي شامل */
+body * {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* إخفاء العناصر التي يجب أن تكون مخفية فقط */
+.hidden,
+[aria-hidden="true"],
+.sr-only {
+    display: none !important;
+}
+
+/* رسالة تأكيد الإصلاح */
+body::before {
+    content: "✅ تم إصلاح مشاكل ظهور المحتوى";
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #4CAF50;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    z-index: 10000;
+    animation: fadeOut 3s ease-out 2s forwards;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; visibility: hidden; }
+}

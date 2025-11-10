@@ -1,0 +1,595 @@
+/* إعدادات عامة */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+    --success-color: #4CAF50;
+    --warning-color: #ff9800;
+    --error-color: #f44336;
+    --text-color: #333;
+    --bg-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --border-color: #e9ecef;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --border-radius: 12px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* المظهر الداكن */
+[data-theme="dark"] {
+    --text-color: #e9ecef;
+    --bg-color: #1a1a1a;
+    --card-bg: #2d3748;
+    --border-color: #4a5568;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+body {
+    font-family: "Noto Kufi Arabic", "Cairo", Arial, sans-serif;
+    line-height: 1.7;
+    background: linear-gradient(135deg, var(--bg-color) 0%, #e3f2fd 100%);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    transition: var(--transition);
+    overflow-x: hidden;
+}
+
+/* شريط التنقل */
+.navbar {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    animation: slideDown 0.6s ease-out;
+}
+
+.navbar h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, #fff, #e3f2fd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+.navbar nav ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+
+.navbar nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 25px;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.navbar nav ul li a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: var(--transition);
+}
+
+.navbar nav ul li a:hover::before {
+    left: 100%;
+}
+
+.navbar nav ul li a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+/* الشريط الجانبي */
+.sidebar {
+    width: 280px;
+    background: var(--card-bg);
+    padding: 24px;
+    position: fixed;
+    top: 80px;
+    bottom: 0;
+    overflow-y: auto;
+    border-right: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    animation: slideInRight 0.6s ease-out;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 3px;
+}
+
+.sidebar-section {
+    margin-bottom: 32px;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.sidebar-section h4 {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--primary-color);
+    position: relative;
+}
+
+.sidebar-section h4::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: var(--secondary-color);
+    animation: expandWidth 1s ease-out 0.3s both;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar ul li {
+    margin-bottom: 12px;
+    transform: translateX(-20px);
+    opacity: 0;
+    animation: slideInLeft 0.6s ease-out forwards;
+}
+
+.sidebar ul li:nth-child(1) { animation-delay: 0.1s; }
+.sidebar ul li:nth-child(2) { animation-delay: 0.2s; }
+.sidebar ul li:nth-child(3) { animation-delay: 0.3s; }
+.sidebar ul li:nth-child(4) { animation-delay: 0.4s; }
+.sidebar ul li:nth-child(5) { animation-delay: 0.5s; }
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: var(--text-color);
+    padding: 10px 16px;
+    border-radius: var(--border-radius);
+    display: block;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.sidebar ul li a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    opacity: 0.1;
+    transition: var(--transition);
+}
+
+.sidebar ul li a:hover::before {
+    left: 0;
+}
+
+.sidebar ul li a:hover {
+    color: var(--primary-color);
+    transform: translateX(8px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+/* المحتوى الرئيسي */
+.content {
+    margin-right: 300px;
+    padding: 32px;
+    animation: fadeIn 0.8s ease-out;
+    min-height: calc(100vh - 80px);
+}
+
+.content section {
+    margin-bottom: 60px;
+    opacity: 1;
+    transform: translateY(0);
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.content section:nth-child(1) { animation-delay: 0.2s; }
+.content section:nth-child(2) { animation-delay: 0.4s; }
+.content section:nth-child(3) { animation-delay: 0.6s; }
+.content section:nth-child(4) { animation-delay: 0.8s; }
+
+.content h2 {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 2.2rem;
+    margin-bottom: 24px;
+    position: relative;
+    padding-bottom: 16px;
+}
+
+.content h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border-radius: 2px;
+    animation: expandWidth 1s ease-out 0.5s both;
+}
+
+.content article {
+    background: var(--card-bg);
+    padding: 32px;
+    border-radius: var(--border-radius);
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.content article::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
+    transform: scaleY(0);
+    transition: var(--transition);
+}
+
+.content article:hover::before {
+    transform: scaleY(1);
+}
+
+.content article:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(102, 126, 234, 0.15);
+}
+
+.content h3 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+    position: relative;
+}
+
+.content h4 {
+    color: var(--secondary-color);
+    font-size: 1.2rem;
+    margin: 20px 0 12px 0;
+}
+
+.content p {
+    margin-bottom: 16px;
+    line-height: 1.8;
+}
+
+/* أمثلة الكود */
+.example {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 24px;
+    margin: 20px 0;
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+[data-theme="dark"] .example {
+    background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+}
+
+.example::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+}
+
+.content pre {
+    background: #1e1e1e;
+    color: #d4d4d4;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 16px 0;
+    position: relative;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.content pre::-webkit-scrollbar {
+    height: 8px;
+}
+
+.content pre::-webkit-scrollbar-track {
+    background: #2d2d2d;
+}
+
+.content pre::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+/* أزرار التجربة */
+.try-btn {
+    background: linear-gradient(135deg, var(--success-color), #45a049);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: var(--transition);
+    margin-top: 16px;
+    position: relative;
+    overflow: hidden;
+}
+
+.try-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transition: var(--transition);
+    transform: translate(-50%, -50%);
+}
+
+.try-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.try-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(76, 175, 80, 0.3);
+}
+
+/* التذييل */
+footer {
+    text-align: center;
+    padding: 24px;
+    background: var(--card-bg);
+    border-top: 1px solid var(--border-color);
+    margin-top: auto;
+    animation: fadeIn 1s ease-out 1s both;
+}
+
+/* ضمان ظهور المحتوى */
+.content section,
+.content article {
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: block !important;
+}
+
+/* إصلاح مشاكل التحريك */
+@media (prefers-reduced-motion: reduce) {
+    .content section {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+/* التصميم المتجاوب */
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 250px;
+    }
+    
+    .content {
+        margin-right: 270px;
+        padding: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        transition: var(--transition);
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+    }
+    
+    .content {
+        margin-right: 0;
+        padding: 16px;
+    }
+    
+    .navbar {
+        padding: 12px 16px;
+    }
+    
+    .navbar h1 {
+        font-size: 1.4rem;
+    }
+    
+    .navbar nav ul {
+        gap: 12px;
+    }
+    
+    .navbar nav ul li a {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content {
+        padding: 12px;
+    }
+    
+    .content article {
+        padding: 20px;
+    }
+    
+    .content h2 {
+        font-size: 1.8rem;
+    }
+    
+    .navbar nav ul {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+/* الأنيميشن */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    50% {
+        opacity: 0.5;
+        transform: translateY(15px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes expandWidth {
+    from {
+        width: 0;
+    }
+    to {
+        width: 60px;
+    }
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    }
+    to {
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* تأثيرات إضافية */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: var(--transition);
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* تحسينات الأداء */
+.content article,
+.sidebar ul li a,
+.navbar nav ul li a {
+    will-change: transform;
+}
+
+/* تأثيرات الهوفر المتقدمة */
+.content article:hover h3 {
+    color: var(--secondary-color);
+    transition: var(--transition);
+}
+
+.example:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(102, 126, 234, 0.1);
+}

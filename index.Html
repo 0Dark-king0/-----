@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>موقع تعلم البرمجة</title>
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="fix-visibility.css">
+  <style>
+    /* إصلاح طارئ لضمان ظهور المحتوى */
+    .content section,
+    .content article {
+      opacity: 1 !important;
+      visibility: visible !important;
+      display: block !important;
+      transform: none !important;
+    }
+    
+    .content {
+      opacity: 1 !important;
+      visibility: visible !important;
+      display: block !important;
+    }
+    
+    /* إصلاح مشكلة التنسيق على الشاشات الصغيرة */
+    @media (max-width: 768px) {
+      .content {
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+      }
+      
+      .sidebar {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <h1>موقع تعلم البرمجة</h1>
+    <nav>
+      <ul>
+        <li><a href="#html">HTML</a></li>
+        <li><a href="#css">CSS</a></li>
+        <li><a href="#js">JavaScript</a></li>
+        <li><a href="#python">Python</a></li>
+        <li><a href="#java">Java</a></li>
+        <li><a href="code-editor.html">💻 محرر الكود</a></li>
+        <li><a href="certificates/index.html">🏆 الشهادات</a></li>
+        <li><a href="games/index.html">🎮 الألعاب</a></li>
+        <li><a href="progress/index.html">📊 التقدم</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <h4>HTML</h4>
+      <ul>
+        <li><a href="lessons/html-intro.html">مقدمة HTML</a></li>
+        <li><a href="lessons/html-elements.html">العناصر الأساسية</a></li>
+        <li><a href="lessons/html-attributes.html">الخصائص</a></li>
+        <li><a href="#html_forms">النماذج</a></li>
+        <li><a href="#html_tables">الجداول</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-section">
+      <h4>CSS</h4>
+      <ul>
+        <li><a href="lessons/css-intro.html">مقدمة CSS</a></li>
+        <li><a href="#css_selectors">المحددات</a></li>
+        <li><a href="#css_colors">الألوان</a></li>
+        <li><a href="#css_layout">التخطيط</a></li>
+        <li><a href="#css_responsive">التصميم المتجاوب</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-section">
+      <h4>JavaScript</h4>
+      <ul>
+        <li><a href="lessons/javascript-intro.html">مقدمة JS</a></li>
+        <li><a href="#js_variables">المتغيرات</a></li>
+        <li><a href="#js_functions">الدوال</a></li>
+        <li><a href="#js_events">الأحداث</a></li>
+        <li><a href="#js_dom">التعامل مع DOM</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-section">
+      <h4>Python</h4>
+      <ul>
+        <li><a href="#python_intro">مقدمة Python</a></li>
+        <li><a href="#python_variables">المتغيرات</a></li>
+        <li><a href="#python_functions">الدوال</a></li>
+        <li><a href="#python_classes">الفئات</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-section">
+      <h4>Java</h4>
+      <ul>
+        <li><a href="lessons/java-intro.html">مقدمة Java</a></li>
+        <li><a href="#java_variables">المتغيرات</a></li>
+        <li><a href="#java_classes">الفئات والكائنات</a></li>
+        <li><a href="#java_inheritance">الوراثة</a></li>
+        <li><a href="#java_collections">المجموعات</a></li>
+      </ul>
+    </div>
+    
+    <div class="sidebar-section">
+      <h4>🛠️ الأدوات</h4>
+      <ul>
+        <li><a href="code-editor.html">💻 محرر الكود</a></li>
+        <li><a href="certificates/index.html">🏆 الشهادات</a></li>
+        <li><a href="games/index.html">🎮 الألعاب</a></li>
+        <li><a href="progress/index.html">📊 التقدم</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main class="content">
+    <section id="html">
+      <h2>تعلم HTML</h2>
+
+      <article id="html_intro">
+        <h3>مقدمة HTML</h3>
+        <p>HTML (HyperText Markup Language) هي لغة الترميز الأساسية لإنشاء صفحات الويب. تستخدم العلامات (Tags) لتحديد هيكل ومحتوى الصفحة.</p>
+        <div class="example">
+          <h4>مثال بسيط:</h4>
+          <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;عنوان الصفحة&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;مرحباً بالعالم!&lt;/h1&gt;
+    &lt;p&gt;هذه فقرة نصية.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+      </article>
+
+      <article id="html_elements">
+        <h3>العناصر الأساسية</h3>
+        <p>العناصر الأساسية في HTML تشمل العناوين والفقرات والروابط والصور.</p>
+        
+        <h4>العناوين (Headings):</h4>
+        <div class="example">
+          <pre><code>&lt;h1&gt;عنوان رئيسي&lt;/h1&gt;
+&lt;h2&gt;عنوان فرعي&lt;/h2&gt;
+&lt;h3&gt;عنوان فرعي صغير&lt;/h3&gt;</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+
+        <h4>الفقرات والنصوص:</h4>
+        <div class="example">
+          <pre><code>&lt;p&gt;هذه فقرة عادية.&lt;/p&gt;
+&lt;strong&gt;نص مهم&lt;/strong&gt;
+&lt;em&gt;نص مائل&lt;/em&gt;
+&lt;br&gt; &lt;!-- فاصل سطر --&gt;</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+
+        <h4>الروابط:</h4>
+        <div class="example">
+          <pre><code>&lt;a href="https://www.google.com"&gt;رابط إلى جوجل&lt;/a&gt;
+&lt;a href="#section1"&gt;رابط داخلي&lt;/a&gt;</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+
+        <h4>الصور:</h4>
+        <div class="example">
+          <pre><code>&lt;img src="image.jpg" alt="وصف الصورة" width="300"&gt;
+&lt;img src="https://via.placeholder.com/150" alt="صورة تجريبية"&gt;</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+      </article>
+
+      <article id="html_attributes">
+        <h3>خصائص العناصر (Attributes)</h3>
+        <p>الخصائص تعطي معلومات إضافية عن العناصر وتتحكم في سلوكها ومظهرها.</p>
+        <div class="example">
+          <pre><code>&lt;div id="container" class="main-content" style="color: blue;"&gt;
+    محتوى مع خصائص مختلفة
+&lt;/div&gt;
+
+&lt;input type="text" placeholder="أدخل اسمك" required&gt;
+&lt;button type="submit" disabled&gt;إرسال&lt;/button&gt;</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+      </article>
+
+      <article id="html_forms">
+        <h3>النماذج (Forms)</h3>
+        <p>النماذج تسمح للمستخدمين بإدخال البيانات وإرسالها للخادم.</p>
+        <div class="example">
+          <pre><code>&lt;form action="/submit" method="post"&gt;
+    &lt;label for="name"&gt;الاسم:&lt;/label&gt;
+    &lt;input type="text" id="name" name="name" required&gt;
+    
+    &lt;label for="email"&gt;البريد الإلكتروني:&lt;/label&gt;
+    &lt;input type="email" id="email" name="email"&gt;
+    
+    &lt;label for="message"&gt;الرسالة:&lt;/label&gt;
+    &lt;textarea id="message" name="message" rows="4"&gt;&lt;/textarea&gt;
+    
+    &lt;input type="submit" value="إرسال"&gt;
+&lt;/form&gt;</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+      </article>
+
+      <article id="html_tables">
+        <h3>الجداول (Tables)</h3>
+        <p>الجداول تستخدم لعرض البيانات في صفوف وأعمدة منظمة.</p>
+        <div class="example">
+          <pre><code>&lt;table border="1"&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;الاسم&lt;/th&gt;
+            &lt;th&gt;العمر&lt;/th&gt;
+            &lt;th&gt;المدينة&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;أحمد&lt;/td&gt;
+            &lt;td&gt;25&lt;/td&gt;
+            &lt;td&gt;الرياض&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;فاطمة&lt;/td&gt;
+            &lt;td&gt;30&lt;/td&gt;
+            &lt;td&gt;جدة&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+      </article>
+    </section>
+
+    <section id="css">
+      <h2>تعلم CSS</h2>
+
+      <article id="css_intro">
+        <h3>مقدمة CSS</h3>
+        <p>CSS (Cascading Style Sheets) تستخدم لتصميم وتنسيق مظهر صفحات الويب. تتحكم في الألوان والخطوط والتخطيط والمسافات.</p>
+        <div class="example">
+          <h4>مثال أساسي:</h4>
+          <pre><code>/* تنسيق العنصر body */
+body {
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+/* تنسيق العناوين */
+h1 {
+    color: #333;
+    text-align: center;
+}</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+      </article>
+
+      <article id="css_selectors">
+        <h3>المحددات (Selectors)</h3>
+        <p>المحددات تحدد العناصر التي تريد تطبيق التنسيق عليها.</p>
+        
+        <h4>المحددات الأساسية:</h4>
+        <div class="example">
+          <pre><code>/* محدد العنصر */
+p {
+    color: blue;
+}
+
+/* محدد الفئة (Class) */
+.highlight {
+    background-color: yellow;
+}
+
+/* محدد المعرف (ID) */
+#header {
+    font-size: 24px;
+}
+
+/* محدد الخاصية */
+input[type="text"] {
+    border: 2px solid #ccc;
+}</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+
+        <h4>المحددات المتقدمة:</h4>
+        <div class="example">
+          <pre><code>/* محدد الأطفال */
+div > p {
+    margin: 10px;
+}
+
+/* محدد الأشقاء */
+h2 + p {
+    font-weight: bold;
+}
+
+/* محدد الحالة الزائفة */
+a:hover {
+    color: red;
+    text-decoration: underline;
+}
+
+/* محدد العنصر الأول */
+li:first-child {
+    list-style-type: none;
+}</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+      </article>
+
+      <article id="css_colors">
+        <h3>الألوان والخلفيات</h3>
+        <p>يمكن تحديد الألوان بطرق مختلفة: الأسماء، الكود السادس عشر، RGB، وHSL.</p>
+        <div class="example">
+          <pre><code>/* طرق مختلفة لتحديد الألوان */
+.color-name {
+    color: red;
+    background-color: lightblue;
+}
+
+.color-hex {
+    color: #ff6b6b;
+    background-color: #4ecdc4;
+}
+
+.color-rgb {
+    color: rgb(255, 107, 107);
+    background-color: rgba(78, 205, 196, 0.5);
+}
+
+.gradient-bg {
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+}
+
+.image-bg {
+    background-image: url('pattern.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+      </article>
+
+      <article id="css_layout">
+        <h3>التخطيط (Layout)</h3>
+        <p>CSS توفر عدة طرق لتخطيط العناصر: Flexbox وGrid وPositioning.</p>
+        
+        <h4>Flexbox:</h4>
+        <div class="example">
+          <pre><code>/* حاوي Flexbox */
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.flex-item {
+    flex: 1;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+/* اتجاه العمود */
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+}</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+
+        <h4>CSS Grid:</h4>
+        <div class="example">
+          <pre><code>/* شبكة CSS */
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: auto 1fr auto;
+    gap: 20px;
+    height: 100vh;
+}
+
+.header {
+    grid-column: 1 / -1;
+    background-color: #333;
+    color: white;
+}
+
+.sidebar {
+    background-color: #f0f0f0;
+}
+
+.main-content {
+    background-color: white;
+}</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+      </article>
+
+      <article id="css_responsive">
+        <h3>التصميم المتجاوب</h3>
+        <p>التصميم المتجاوب يجعل الموقع يتكيف مع أحجام الشاشات المختلفة.</p>
+        <div class="example">
+          <pre><code>/* استعلامات الوسائط */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* للأجهزة اللوحية */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .flex-container {
+        flex-direction: column;
+    }
+}
+
+/* للهواتف المحمولة */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 10px;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+}</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+      </article>
+    </section>
+
+    <section id="js">
+      <h2>تعلم JavaScript</h2>
+
+      <article id="js_intro">
+        <h3>مقدمة JavaScript</h3>
+        <p>JavaScript هي لغة برمجة تتيح إضافة تفاعلية وحيوية لصفحات الويب. تعمل في المتصفح وتتفاعل مع HTML وCSS.</p>
+        <div class="example">
+          <h4>مثال بسيط:</h4>
+          <pre><code>// طباعة رسالة في وحدة التحكم
+console.log('مرحباً بالعالم!');
+
+// عرض رسالة تنبيه
+alert('هذه رسالة تنبيه');
+
+// تغيير محتوى عنصر HTML
+document.getElementById('demo').innerHTML = 'مرحباً من JavaScript!';</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+      </article>
+
+      <article id="js_variables">
+        <h3>المتغيرات وأنواع البيانات</h3>
+        <p>المتغيرات تخزن البيانات ويمكن استخدامها في البرنامج.</p>
+        
+        <h4>إعلان المتغيرات:</h4>
+        <div class="example">
+          <pre><code>// طرق مختلفة لإعلان المتغيرات
+var name = 'أحمد';        // طريقة قديمة
+let age = 25;             // طريقة حديثة
+const PI = 3.14159;       // ثابت لا يتغير
+
+// أنواع البيانات المختلفة
+let text = 'هذا نص';           // String
+let number = 42;                // Number
+let isActive = true;            // Boolean
+let items = [1, 2, 3, 4, 5];    // Array
+let person = {                  // Object
+    name: 'فاطمة',
+    age: 30,
+    city: 'جدة'
+};</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+
+        <h4>العمليات الحسابية:</h4>
+        <div class="example">
+          <pre><code>let a = 10;
+let b = 5;
+
+// عمليات حسابية
+let sum = a + b;        // جمع: 15
+let diff = a - b;       // طرح: 5
+let product = a * b;    // ضرب: 50
+let quotient = a / b;   // قسمة: 2
+let remainder = a % b;  // باقي القسمة: 0
+
+// عمليات مقارنة
+console.log(a > b);     // true
+console.log(a === b);   // false
+console.log(a !== b);   // true</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+      </article>
+
+      <article id="js_functions">
+        <h3>الدوال (Functions)</h3>
+        <p>الدوال هي كتل من الكود يمكن إعادة استخدامها واستدعاؤها عند الحاجة.</p>
+        
+        <h4>إعلان الدوال:</h4>
+        <div class="example">
+          <pre><code>// دالة بسيطة
+function sayHello() {
+    console.log('مرحباً!');
+}
+
+// دالة مع معاملات
+function greet(name) {
+    return 'مرحباً ' + name + '!';
+}
+
+// دالة مع عدة معاملات
+function add(a, b) {
+    return a + b;
+}
+
+// استدعاء الدوال
+sayHello();
+let message = greet('أحمد');
+let result = add(5, 3);</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+
+        <h4>الدوال السهمية (Arrow Functions):</h4>
+        <div class="example">
+          <pre><code>// دالة سهمية بسيطة
+const square = (x) => x * x;
+
+// دالة سهمية مع عدة أسطر
+const multiply = (a, b) => {
+    let result = a * b;
+    return result;
+};
+
+// دالة بدون معاملات
+const getCurrentTime = () => new Date().toLocaleString();
+
+console.log(square(5));           // 25
+console.log(multiply(3, 4));      // 12
+console.log(getCurrentTime());    // الوقت الحالي</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+      </article>
+
+      <article id="js_events">
+        <h3>الأحداث (Events)</h3>
+        <p>الأحداث تسمح للبرنامج بالاستجابة لتفاعلات المستخدم مثل النقر والكتابة.</p>
+        <div class="example">
+          <pre><code>// إضافة مستمع لحدث النقر
+document.getElementById('myButton').addEventListener('click', function() {
+    alert('تم النقر على الزر!');
+});
+
+// مستمع لحدث الكتابة
+document.getElementById('myInput').addEventListener('input', function(event) {
+    console.log('النص المدخل: ' + event.target.value);
+});
+
+// مستمع لحدث تحميل الصفحة
+window.addEventListener('load', function() {
+    console.log('تم تحميل الصفحة بالكامل');
+});
+
+// مستمع لحدث حركة الفأرة
+document.addEventListener('mousemove', function(event) {
+    console.log('موقع الفأرة: ' + event.clientX + ', ' + event.clientY);
+});</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+      </article>
+
+      <article id="js_dom">
+        <h3>التعامل مع DOM</h3>
+        <p>DOM (Document Object Model) يسمح لـ JavaScript بالتعامل مع عناصر HTML وتغييرها.</p>
+        
+        <h4>العثور على العناصر:</h4>
+        <div class="example">
+          <pre><code>// العثور على عنصر بالمعرف
+let element = document.getElementById('myElement');
+
+// العثور على عناصر بالفئة
+let elements = document.getElementsByClassName('myClass');
+
+// العثور على عناصر بالعلامة
+let paragraphs = document.getElementsByTagName('p');
+
+// استخدام CSS Selectors
+let firstButton = document.querySelector('.btn');
+let allButtons = document.querySelectorAll('.btn');</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+
+        <h4>تغيير العناصر:</h4>
+        <div class="example">
+          <pre><code>// تغيير المحتوى
+let title = document.getElementById('title');
+title.innerHTML = 'عنوان جديد';
+title.textContent = 'عنوان نصي فقط';
+
+// تغيير الخصائص
+let image = document.getElementById('myImage');
+image.src = 'new-image.jpg';
+image.alt = 'صورة جديدة';
+
+// تغيير التنسيق
+let box = document.getElementById('box');
+box.style.backgroundColor = 'blue';
+box.style.width = '200px';
+box.style.height = '100px';
+
+// إضافة وحذف الفئات
+box.classList.add('active');
+box.classList.remove('hidden');
+box.classList.toggle('highlight');</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+
+        <h4>إنشاء عناصر جديدة:</h4>
+        <div class="example">
+          <pre><code>// إنشاء عنصر جديد
+let newParagraph = document.createElement('p');
+newParagraph.textContent = 'هذه فقرة جديدة';
+newParagraph.className = 'new-paragraph';
+
+// إضافة العنصر إلى الصفحة
+let container = document.getElementById('container');
+container.appendChild(newParagraph);
+
+// إنشاء قائمة ديناميكية
+let list = document.createElement('ul');
+let items = ['عنصر 1', 'عنصر 2', 'عنصر 3'];
+
+items.forEach(function(itemText) {
+    let listItem = document.createElement('li');
+    listItem.textContent = itemText;
+    list.appendChild(listItem);
+});
+
+container.appendChild(list);</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+      </article>
+    </section>
+
+    <section id="python">
+      <h2>تعلم Python</h2>
+
+      <article id="python_intro">
+        <h3>مقدمة Python</h3>
+        <p>Python هي لغة برمجة قوية وسهلة التعلم، تستخدم في تطوير الويب، الذكاء الاصطناعي، وتحليل البيانات.</p>
+        <div class="example">
+          <h4>مثال بسيط:</h4>
+          <pre><code># طباعة رسالة
+print("مرحباً بالعالم!")
+
+# متغيرات
+name = "أحمد"
+age = 25
+print(f"اسمي {name} وعمري {age} سنة")</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+      </article>
+
+      <article id="python_variables">
+        <h3>المتغيرات وأنواع البيانات</h3>
+        <div class="example">
+          <pre><code># أنواع البيانات المختلفة
+text = "هذا نص"           # String
+number = 42              # Integer
+float_num = 3.14         # Float
+is_active = True         # Boolean
+my_list = [1, 2, 3, 4]   # List
+my_dict = {"name": "فاطمة", "age": 30}  # Dictionary
+
+print(type(text))
+print(len(my_list))</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+      </article>
+
+      <article id="python_functions">
+        <h3>الدوال في Python</h3>
+        <p>الدوال تساعد في تنظيم الكود وإعادة استخدامه بكفاءة.</p>
+        
+        <h4>إنشاء الدوال:</h4>
+        <div class="example">
+          <pre><code># دالة بسيطة
+def greet():
+    print("مرحباً!")
+
+# دالة مع معاملات
+def greet_person(name):
+    return f"مرحباً {name}!"
+
+# دالة مع قيم افتراضية
+def calculate_area(length, width=1):
+    return length * width
+
+# استدعاء الدوال
+greet()
+message = greet_person("أحمد")
+area = calculate_area(5, 3)
+print(message)
+print(f"المساحة: {area}")</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+
+        <h4>دوال Lambda:</h4>
+        <div class="example">
+          <pre><code># دوال مجهولة قصيرة
+square = lambda x: x ** 2
+add = lambda x, y: x + y
+
+# استخدام مع map و filter
+numbers = [1, 2, 3, 4, 5]
+squared = list(map(lambda x: x**2, numbers))
+even_numbers = list(filter(lambda x: x % 2 == 0, numbers))
+
+print(f"المربعات: {squared}")
+print(f"الأرقام الزوجية: {even_numbers}")</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+      </article>
+
+      <article id="python_classes">
+        <h3>الفئات والكائنات</h3>
+        <p>البرمجة الكائنية في Python تساعد في تنظيم الكود وإنشاء برامج معقدة.</p>
+        
+        <div class="example">
+          <pre><code># إنشاء فئة
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+    
+    def introduce(self):
+        return f"اسمي {self.name} وعمري {self.age} سنة"
+    
+    def have_birthday(self):
+        self.age += 1
+        print(f"عيد ميلاد سعيد! أصبح عمري {self.age}")
+
+# إنشاء كائنات
+person1 = Person("أحمد", 25)
+person2 = Person("فاطمة", 30)
+
+print(person1.introduce())
+person1.have_birthday()
+
+# فئة متقدمة مع وراثة
+class Student(Person):
+    def __init__(self, name, age, student_id):
+        super().__init__(name, age)
+        self.student_id = student_id
+        self.grades = []
+    
+    def add_grade(self, grade):
+        self.grades.append(grade)
+    
+    def get_average(self):
+        if self.grades:
+            return sum(self.grades) / len(self.grades)
+        return 0
+
+student = Student("سارة", 20, "S123")
+student.add_grade(85)
+student.add_grade(92)
+print(f"المعدل: {student.get_average()}")</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+      </article>
+    </section>
+
+    <section id="java">
+      <h2>تعلم Java</h2>
+
+      <article id="java_intro">
+        <h3>مقدمة Java</h3>
+        <p>Java هي لغة برمجة قوية ومتعددة المنصات، تستخدم في تطوير التطبيقات المكتبية والويب والمحمولة.</p>
+        <div class="example">
+          <h4>برنامج Hello World:</h4>
+          <pre><code>public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("مرحباً بالعالم!");
+        
+        // متغيرات أساسية
+        String name = "أحمد";
+        int age = 25;
+        double salary = 5000.50;
+        boolean isActive = true;
+        
+        System.out.println("الاسم: " + name);
+        System.out.println("العمر: " + age);
+        System.out.println("الراتب: " + salary);
+        System.out.println("نشط: " + isActive);
+    }
+}</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+      </article>
+
+      <article id="java_variables">
+        <h3>المتغيرات وأنواع البيانات</h3>
+        <p>Java لغة قوية النوع، مما يعني أن كل متغير يجب أن يكون له نوع محدد.</p>
+        
+        <h4>الأنواع الأساسية:</h4>
+        <div class="example">
+          <pre><code>public class DataTypes {
+    public static void main(String[] args) {
+        // الأنواع الأساسية (Primitive Types)
+        byte smallNumber = 127;          // -128 إلى 127
+        short mediumNumber = 32000;      // -32,768 إلى 32,767
+        int number = 2147483647;         // -2^31 إلى 2^31-1
+        long bigNumber = 9223372036854775807L; // -2^63 إلى 2^63-1
+        
+        float decimal = 3.14f;           // دقة مفردة
+        double preciseDecimal = 3.14159265359; // دقة مضاعفة
+        
+        char letter = 'أ';               // حرف واحد
+        boolean isTrue = true;           // صحيح أو خطأ
+        
+        // الأنواع المرجعية (Reference Types)
+        String text = "مرحباً بكم في Java";
+        String[] names = {"أحمد", "فاطمة", "محمد"};
+        
+        // طباعة القيم
+        System.out.println("النص: " + text);
+        System.out.println("الرقم: " + number);
+        System.out.println("العدد العشري: " + preciseDecimal);
+        
+        // حلقة تكرار للأسماء
+        for (String name : names) {
+            System.out.println("الاسم: " + name);
+        }
+    }
+}</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+
+        <h4>العمليات الحسابية:</h4>
+        <div class="example">
+          <pre><code>public class MathOperations {
+    public static void main(String[] args) {
+        int a = 10;
+        int b = 3;
+        
+        // العمليات الأساسية
+        System.out.println("الجمع: " + (a + b));
+        System.out.println("الطرح: " + (a - b));
+        System.out.println("الضرب: " + (a * b));
+        System.out.println("القسمة: " + (a / b));
+        System.out.println("باقي القسمة: " + (a % b));
+        
+        // عمليات المقارنة
+        System.out.println("a > b: " + (a > b));
+        System.out.println("a == b: " + (a == b));
+        System.out.println("a != b: " + (a != b));
+        
+        // عمليات منطقية
+        boolean x = true;
+        boolean y = false;
+        System.out.println("x && y: " + (x && y));
+        System.out.println("x || y: " + (x || y));
+        System.out.println("!x: " + (!x));
+    }
+}</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+      </article>
+
+      <article id="java_classes">
+        <h3>الفئات والكائنات</h3>
+        <p>Java هي لغة برمجة كائنية بالكامل، حيث كل شيء عبارة عن كائن.</p>
+        
+        <div class="example">
+          <pre><code>// تعريف فئة Person
+public class Person {
+    // الخصائص (Fields)
+    private String name;
+    private int age;
+    private String email;
+    
+    // المنشئ (Constructor)
+    public Person(String name, int age, String email) {
+        this.name = name;
+        this.age = age;
+        this.email = email;
+    }
+    
+    // منشئ افتراضي
+    public Person() {
+        this("غير محدد", 0, "");
+    }
+    
+    // الطرق (Methods)
+    public void introduce() {
+        System.out.println("مرحباً، اسمي " + name + " وعمري " + age + " سنة");
+    }
+    
+    public void celebrateBirthday() {
+        age++;
+        System.out.println("عيد ميلاد سعيد! أصبح عمري " + age);
+    }
+    
+    // Getters و Setters
+    public String getName() {
+        return name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public int getAge() {
+        return age;
+    }
+    
+    public void setAge(int age) {
+        if (age >= 0) {
+            this.age = age;
+        }
+    }
+    
+    // استخدام الفئة
+    public static void main(String[] args) {
+        // إنشاء كائنات
+        Person person1 = new Person("أحمد", 25, "ahmed@email.com");
+        Person person2 = new Person();
+        
+        person1.introduce();
+        person1.celebrateBirthday();
+        
+        person2.setName("فاطمة");
+        person2.setAge(30);
+        person2.introduce();
+    }
+}</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+      </article>
+
+      <article id="java_inheritance">
+        <h3>الوراثة (Inheritance)</h3>
+        <p>الوراثة تسمح بإنشاء فئات جديدة بناءً على فئات موجودة، مما يعزز إعادة استخدام الكود.</p>
+        
+        <div class="example">
+          <pre><code>// الفئة الأساسية
+class Animal {
+    protected String name;
+    protected int age;
+    
+    public Animal(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    
+    public void eat() {
+        System.out.println(name + " يأكل");
+    }
+    
+    public void sleep() {
+        System.out.println(name + " ينام");
+    }
+    
+    public void makeSound() {
+        System.out.println(name + " يصدر صوتاً");
+    }
+}
+
+// فئة مشتقة
+class Dog extends Animal {
+    private String breed;
+    
+    public Dog(String name, int age, String breed) {
+        super(name, age); // استدعاء منشئ الفئة الأساسية
+        this.breed = breed;
+    }
+    
+    @Override
+    public void makeSound() {
+        System.out.println(name + " ينبح: وف وف!");
+    }
+    
+    public void fetch() {
+        System.out.println(name + " يجلب الكرة");
+    }
+    
+    public void showInfo() {
+        System.out.println("الاسم: " + name + ", العمر: " + age + ", السلالة: " + breed);
+    }
+}
+
+// فئة مشتقة أخرى
+class Cat extends Animal {
+    private boolean isIndoor;
+    
+    public Cat(String name, int age, boolean isIndoor) {
+        super(name, age);
+        this.isIndoor = isIndoor;
+    }
+    
+    @Override
+    public void makeSound() {
+        System.out.println(name + " يموء: مياو!");
+    }
+    
+    public void climb() {
+        System.out.println(name + " يتسلق");
+    }
+}
+
+// الاستخدام
+public class InheritanceExample {
+    public static void main(String[] args) {
+        Dog dog = new Dog("ريكس", 3, "جيرمن شيبرد");
+        Cat cat = new Cat("مشمش", 2, true);
+        
+        dog.showInfo();
+        dog.eat();
+        dog.makeSound();
+        dog.fetch();
+        
+        System.out.println("---");
+        
+        cat.eat();
+        cat.makeSound();
+        cat.climb();
+        
+        // استخدام البوليمورفيزم
+        Animal[] animals = {dog, cat};
+        for (Animal animal : animals) {
+            animal.makeSound(); // سيستدعي الطريقة المناسبة لكل كائن
+        }
+    }
+}</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+      </article>
+
+      <article id="java_collections">
+        <h3>المجموعات (Collections)</h3>
+        <p>Java توفر مجموعة غنية من هياكل البيانات لتخزين وإدارة البيانات بكفاءة.</p>
+        
+        <h4>ArrayList:</h4>
+        <div class="example">
+          <pre><code>import java.util.*;
+
+public class CollectionsExample {
+    public static void main(String[] args) {
+        // ArrayList - قائمة ديناميكية
+        ArrayList&lt;String&gt; fruits = new ArrayList&lt;&gt;();
+        
+        // إضافة عناصر
+        fruits.add("تفاح");
+        fruits.add("موز");
+        fruits.add("برتقال");
+        fruits.add("عنب");
+        
+        System.out.println("الفواكه: " + fruits);
+        System.out.println("عدد الفواكه: " + fruits.size());
+        
+        // الوصول للعناصر
+        System.out.println("أول فاكهة: " + fruits.get(0));
+        
+        // البحث
+        if (fruits.contains("موز")) {
+            System.out.println("يوجد موز في القائمة");
+        }
+        
+        // التكرار
+        System.out.println("جميع الفواكه:");
+        for (String fruit : fruits) {
+            System.out.println("- " + fruit);
+        }
+        
+        // حذف عنصر
+        fruits.remove("برتقال");
+        System.out.println("بعد حذف البرتقال: " + fruits);
+    }
+}</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+
+        <h4>HashMap:</h4>
+        <div class="example">
+          <pre><code>import java.util.*;
+
+public class HashMapExample {
+    public static void main(String[] args) {
+        // HashMap - خريطة مفتاح-قيمة
+        HashMap&lt;String, Integer&gt; studentGrades = new HashMap&lt;&gt;();
+        
+        // إضافة بيانات
+        studentGrades.put("أحمد", 85);
+        studentGrades.put("فاطمة", 92);
+        studentGrades.put("محمد", 78);
+        studentGrades.put("عائشة", 96);
+        
+        System.out.println("درجات الطلاب: " + studentGrades);
+        
+        // الوصول لقيمة
+        System.out.println("درجة أحمد: " + studentGrades.get("أحمد"));
+        
+        // التحقق من وجود مفتاح
+        if (studentGrades.containsKey("فاطمة")) {
+            System.out.println("فاطمة موجودة في القائمة");
+        }
+        
+        // التكرار عبر المفاتيح والقيم
+        System.out.println("جميع الدرجات:");
+        for (Map.Entry&lt;String, Integer&gt; entry : studentGrades.entrySet()) {
+            String name = entry.getKey();
+            Integer grade = entry.getValue();
+            System.out.println(name + ": " + grade);
+        }
+        
+        // حساب المعدل
+        int total = 0;
+        for (Integer grade : studentGrades.values()) {
+            total += grade;
+        }
+        double average = (double) total / studentGrades.size();
+        System.out.println("المعدل العام: " + average);
+    }
+}</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+
+        <h4>HashSet:</h4>
+        <div class="example">
+          <pre><code>import java.util.*;
+
+public class HashSetExample {
+    public static void main(String[] args) {
+        // HashSet - مجموعة بدون تكرار
+        HashSet&lt;String&gt; uniqueWords = new HashSet&lt;&gt;();
+        
+        // إضافة كلمات
+        String[] words = {"مرحبا", "عالم", "جافا", "برمجة", "مرحبا", "عالم"};
+        
+        for (String word : words) {
+            uniqueWords.add(word);
+        }
+        
+        System.out.println("الكلمات الأصلية: " + Arrays.toString(words));
+        System.out.println("الكلمات الفريدة: " + uniqueWords);
+        System.out.println("عدد الكلمات الفريدة: " + uniqueWords.size());
+        
+        // التحقق من وجود كلمة
+        if (uniqueWords.contains("جافا")) {
+            System.out.println("كلمة 'جافا' موجودة");
+        }
+        
+        // تحويل إلى قائمة مرتبة
+        ArrayList&lt;String&gt; sortedWords = new ArrayList&lt;&gt;(uniqueWords);
+        Collections.sort(sortedWords);
+        System.out.println("الكلمات مرتبة: " + sortedWords);
+    }
+}</code></pre>
+          <button class="try-btn" onclick="tryCode(this)">جرب الكود</button>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 موقع تعلم البرمجة</p>
+  </footer>
+
+  <script src="script.js"></script>
+  
+  <!-- سكريبت إضافي لضمان ظهور المحتوى -->
+  <script>
+    // إصلاح فوري لمشكلة اختفاء المحتوى
+    (function() {
+      function fixContentVisibility() {
+        // إظهار جميع الأقسام والمقالات
+        const sections = document.querySelectorAll('.content section, .content article');
+        sections.forEach(element => {
+          element.style.opacity = '1';
+          element.style.visibility = 'visible';
+          element.style.display = 'block';
+          element.style.transform = 'none';
+        });
+        
+        // إظهار المحتوى الرئيسي
+        const content = document.querySelector('.content');
+        if (content) {
+          content.style.opacity = '1';
+          content.style.visibility = 'visible';
+          content.style.display = 'block';
+        }
+        
+        console.log('✅ تم إصلاح مشكلة ظهور الدروس');
+      }
+      
+      // تشغيل الإصلاح فوراً
+      fixContentVisibility();
+      
+      // تشغيل الإصلاح عند تحميل الصفحة
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', fixContentVisibility);
+      }
+      
+      // تشغيل الإصلاح بعد ثانية واحدة للتأكد
+      setTimeout(fixContentVisibility, 1000);
+      
+      // إضافة زر إصلاح يدوي
+      const fixButton = document.createElement('button');
+      fixButton.innerHTML = '🔧 إصلاح الدروس';
+      fixButton.style.cssText = `
+        position: fixed;
+        bottom: 80px;
+        right: 20px;
+        background: #ff6b6b;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 25px;
+        cursor: pointer;
+        z-index: 1000;
+        font-size: 14px;
+        box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+        transition: all 0.3s ease;
+      `;
+      
+      fixButton.addEventListener('click', () => {
+        fixContentVisibility();
+        fixButton.innerHTML = '✅ تم الإصلاح';
+        setTimeout(() => {
+          fixButton.innerHTML = '🔧 إصلاح الدروس';
+        }, 2000);
+      });
+      
+      document.body.appendChild(fixButton);
+    })();
+  </script>
+</body>
+</html>

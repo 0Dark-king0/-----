@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محرر الكود التفاعلي - موقع تعلم البرمجة</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="fix-visibility.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/material.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/vscode-dark.min.css">
+    <style>
+        /* تصميم مثل VS Code */
+        body {
+            margin: 0;
+            padding: 0;
+            background: #1e1e1e;
+            color: #cccccc;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            overflow: hidden;
+        }
+        
+        .editor-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: #1e1e1e;
+        }
+        
+        .editor-header {
+            background: #2d2d30;
+            border-bottom: 1px solid #3e3e42;
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 35px;
+        }
+        
+        .editor-title {
+            font-size: 13px;
+            color: #cccccc;
+            margin: 0;
+            font-weight: normal;
+        }
+        
+        .title-bar {
+            background: #323233;
+            padding: 8px 16px;
+            border-bottom: 1px solid #3e3e42;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-height: 30px;
+        }
+        
+        .file-tab {
+            background: #2d2d30;
+            border: 1px solid #3e3e42;
+            border-bottom: none;
+            padding: 6px 12px;
+            border-radius: 4px 4px 0 0;
+            font-size: 12px;
+            color: #cccccc;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .file-tab.active {
+            background: #1e1e1e;
+            border-bottom: 1px solid #1e1e1e;
+        }
+        
+        .file-tab .close-btn {
+            margin-left: 8px;
+            color: #858585;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .file-tab .close-btn:hover {
+            color: #cccccc;
+        }
+        
+        .editor-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin: 0;
+        }
+        
+        .editor-controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        
+        .control-btn {
+            background: #0e639c;
+            border: 1px solid #0e639c;
+            color: #ffffff;
+            padding: 4px 8px;
+            font-size: 11px;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .control-btn:hover {
+            background: #1177bb;
+            border-color: #1177bb;
+        }
+        
+        .run-btn {
+            background: #16825d;
+            border-color: #16825d;
+        }
+        
+        .run-btn:hover {
+            background: #1e9c6a;
+            border-color: #1e9c6a;
+        }
+        
+        .clear-btn {
+            background: #a1260d;
+            border-color: #a1260d;
+        }
+        
+        .clear-btn:hover {
+            background: #c42e0f;
+            border-color: #c42e0f;
+        }
+        
+        .save-btn {
+            background: #0e639c;
+            border-color: #0e639c;
+        }
+        
+        .language-selector {
+            background: #3c3c3c;
+            border: 1px solid #3e3e42;
+            color: #cccccc;
+            padding: 4px 8px;
+            font-size: 11px;
+            border-radius: 2px;
+            cursor: pointer;
+        }
+        
+        .language-selector:focus {
+            outline: 1px solid #007acc;
+            border-color: #007acc;
+        }
+        
+        .editor-workspace {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .code-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #1e1e1e;
+            border-right: 1px solid #3e3e42;
+            transition: all 0.3s ease;
+        }
+        
+        .output-panel {
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+            background: #1e1e1e;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .output-panel.collapsed {
+            width: 0;
+            overflow: hidden;
+        }
+        
+        .output-panel.bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 200px;
+            border-top: 1px solid #3e3e42;
+            border-right: none;
+        }
+        
+        /* مناطق الإسقاط */
+        .drop-zone {
+            position: absolute;
+            background: rgba(0, 122, 204, 0.2);
+            border: 2px dashed #007acc;
+            display: none;
+            z-index: 1000;
+            pointer-events: none;
+        }
+        
+        .drop-zone.active {
+            display: block;
+        }
+        
+        .drop-zone-right {
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+        }
+        
+        .drop-zone-bottom {
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+        }
+        
+        .drop-zone-center {
+            top: 25%;
+            left: 25%;
+            right: 25%;
+            bottom: 25%;
+        }
+        
+        /* مؤشر السحب */
+        .drag-preview {
+            position: fixed;
+            background: #2d2d30;
+            border: 1px solid #007acc;
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 12px;
+            color: #cccccc;
+            pointer-events: none;
+            z-index: 2000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        
+        .resize-handle {
+            width: 4px;
+            background: #3e3e42;
+            cursor: col-resize;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: -2px;
+            transition: background 0.2s ease;
+        }
+        
+        .resize-handle:hover {
+            background: #007acc;
+        }
+        
+        .resize-handle-horizontal {
+            height: 4px;
+            width: 100%;
+            cursor: row-resize;
+            position: absolute;
+            top: -2px;
+            left: 0;
+            right: 0;
+        }
+        
+        .panel-header {
+            background: #2d2d30;
+            border-bottom: 1px solid #3e3e42;
+            padding: 8px 16px;
+            font-size: 12px;
+            color: #cccccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 30px;
+            cursor: grab;
+            user-select: none;
+        }
+        
+        .panel-header:active {
+            cursor: grabbing;
+        }
+        
+        .panel-header.dragging {
+            cursor: grabbing;
+            background: #094771;
+        }
+        
+        .panel-controls {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+        
+        .panel-btn {
+            background: transparent;
+            border: none;
+            color: #cccccc;
+            padding: 2px 4px;
+            font-size: 12px;
+            cursor: pointer;
+            border-radius: 2px;
+            transition: all 0.2s ease;
+        }
+        
+        .panel-btn:hover {
+            background: #3e3e42;
+            color: #ffffff;
+        }
+        
+        .panel-btn.active {
+            background: #007acc;
+            color: #ffffff;
+        }
+        
+        .minimap {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 80px;
+            background: #252526;
+            border-left: 1px solid #3e3e42;
+            overflow: hidden;
+        }
+        
+        .minimap-content {
+            transform: scale(0.1);
+            transform-origin: top left;
+            width: 800px;
+            height: 100%;
+            pointer-events: none;
+            font-size: 1px;
+            line-height: 1px;
+        }
+        
+        .CodeMirror {
+            flex: 1;
+            height: 100% !important;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            background: #1e1e1e !important;
+        }
+        
+        .CodeMirror-gutters {
+            background: #1e1e1e !important;
+            border-right: 1px solid #3e3e42 !important;
+        }
+        
+        .CodeMirror-linenumber {
+            color: #858585 !important;
+        }
+        
+        .CodeMirror-cursor {
+            border-left: 1px solid #ffffff !important;
+        }
+        
+        .output-content {
+            flex: 1;
+            padding: 12px;
+            background: #1e1e1e;
+            color: #cccccc;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 13px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            border: none;
+        }
+        
+        .preview-frame {
+            flex: 1;
+            border: none;
+            background: #ffffff;
+        }
+        
+        .error-line {
+            background-color: rgba(255, 0, 0, 0.1) !important;
+        }
+        
+        .status-bar {
+            background: #007acc;
+            color: #ffffff;
+            padding: 4px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            min-height: 22px;
+            border-top: 1px solid #3e3e42;
+        }
+        
+        .status-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .status-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .error-count {
+            color: #f48771;
+            font-weight: normal;
+        }
+        
+        .success-count {
+            color: #73c991;
+            font-weight: normal;
+        }
+        
+        /* شريط البحث */
+        .search-box {
+            position: absolute;
+            top: 50px;
+            right: 20px;
+            background: #2d2d30;
+            border: 1px solid #3e3e42;
+            border-radius: 3px;
+            padding: 8px;
+            display: none;
+            z-index: 1000;
+            min-width: 300px;
+        }
+        
+        .search-box.show {
+            display: block;
+        }
+        
+        .search-input {
+            background: #1e1e1e;
+            border: 1px solid #3e3e42;
+            color: #cccccc;
+            padding: 4px 8px;
+            font-size: 12px;
+            width: 100%;
+            margin-bottom: 4px;
+        }
+        
+        .search-results {
+            max-height: 200px;
+            overflow-y: auto;
+            font-size: 11px;
+        }
+        
+        .search-result {
+            padding: 4px 8px;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+        
+        .search-result:hover {
+            background: #3e3e42;
+        }
+        
+        /* Breadcrumbs */
+        .breadcrumbs {
+            background: #2d2d30;
+            border-bottom: 1px solid #3e3e42;
+            padding: 4px 16px;
+            font-size: 11px;
+            color: #858585;
+        }
+        
+        .breadcrumb-item {
+            display: inline;
+            margin-right: 8px;
+        }
+        
+        .breadcrumb-item:not(:last-child):after {
+            content: " > ";
+            margin-left: 8px;
+        }
+        
+        /* Command Palette */
+        .command-palette {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #2d2d30;
+            border: 1px solid #3e3e42;
+            border-radius: 6px;
+            width: 500px;
+            max-height: 400px;
+            display: none;
+            z-index: 2000;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+        }
+        
+        .command-palette.show {
+            display: block;
+        }
+        
+        .command-input {
+            background: #1e1e1e;
+            border: none;
+            border-bottom: 1px solid #3e3e42;
+            color: #cccccc;
+            padding: 12px 16px;
+            font-size: 14px;
+            width: 100%;
+            outline: none;
+        }
+        
+        .command-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .command-item {
+            padding: 8px 16px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+        }
+        
+        .command-item:hover,
+        .command-item.selected {
+            background: #094771;
+        }
+        
+        .command-shortcut {
+            color: #858585;
+            font-size: 10px;
+        }
+        
+        .templates-section {
+            background: #2d2d30;
+            border-bottom: 1px solid #3e3e42;
+            padding: 8px 16px;
+        }
+        
+        .templates-section h3 {
+            color: #cccccc;
+            font-size: 12px;
+            margin: 0 0 8px 0;
+            font-weight: normal;
+        }
+        
+        .templates-grid {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .template-card {
+            background: #0e639c;
+            border: 1px solid #0e639c;
+            color: #ffffff;
+            padding: 4px 8px;
+            font-size: 11px;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+        
+        .template-card:hover {
+            background: #1177bb;
+            border-color: #1177bb;
+        }
+        
+        .back-btn {
+            position: fixed;
+            top: 8px;
+            left: 16px;
+            background: #0e639c;
+            border: 1px solid #0e639c;
+            color: #ffffff;
+            padding: 4px 8px;
+            font-size: 11px;
+            border-radius: 2px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            z-index: 1000;
+            transition: all 0.2s ease;
+        }
+        
+        .back-btn:hover {
+            background: #1177bb;
+            border-color: #1177bb;
+        }
+        
+        @media (max-width: 768px) {
+            .editor-workspace {
+                flex-direction: column;
+            }
+            
+            .code-panel,
+            .output-panel {
+                flex: none;
+                height: 300px;
+            }
+            
+            .editor-controls {
+                flex-wrap: wrap;
+            }
+            
+            .templates-grid {
+                flex-direction: column;
+            }
+        }
+        
+        /* إخفاء عناصر غير ضرورية */
+        .editor-container,
+        .code-panel,
+        .output-panel {
+            opacity: 1 !important;
+            visibility: visible !important;
+            display: flex !important;
+        }
+        
+        /* تحسينات إضافية لـ VS Code */
+        .CodeMirror-selected {
+            background: #264f78 !important;
+        }
+        
+        .CodeMirror-line::selection,
+        .CodeMirror-line > span::selection,
+        .CodeMirror-line > span > span::selection {
+            background: #264f78 !important;
+        }
+        
+        .CodeMirror-focused .CodeMirror-selected {
+            background: #264f78 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="editor-container">
+        <a href="index.Html" class="back-btn">
+            ← العودة
+        </a>
+        
+        <div class="title-bar">
+            <div class="file-tab active">
+                <span id="currentFileName">main.html</span>
+                <span class="close-btn">×</span>
+            </div>
+        </div>
+        
+        <div class="editor-header">
+            <div class="editor-controls">
+                <select class="language-selector" id="languageSelect">
+                    <option value="html">HTML</option>
+                    <option value="css">CSS</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="python">Python</option>
+                </select>
+                <button class="control-btn run-btn" id="runBtn">
+                    ▶ Run
+                </button>
+                <button class="control-btn clear-btn" id="clearBtn">
+                    Clear
+                </button>
+                <button class="control-btn save-btn" id="saveBtn">
+                    Save
+                </button>
+                <button class="control-btn" id="searchBtn" title="Search (Ctrl+F)">
+                    🔍 Search
+                </button>
+                <button class="control-btn" id="commandBtn" title="Command Palette (Ctrl+Shift+P)">
+                    ⚡ Commands
+                </button>
+                <button class="control-btn" id="formatBtn" title="Format Code (Shift+Alt+F)">
+                    📐 Format
+                </button>
+            </div>
+        </div>
+        
+        <div class="breadcrumbs">
+            <span class="breadcrumb-item">src</span>
+            <span class="breadcrumb-item" id="currentFile">main.html</span>
+        </div>
+        
+        <div class="templates-section">
+            <h3>🎯 قوالب سريعة:</h3>
+            <div class="templates-grid">
+                <div class="template-card" data-template="html-basic">
+                    📄 HTML أساسي
+                </div>
+                <div class="template-card" data-template="css-flexbox">
+                    🎨 CSS Flexbox
+                </div>
+                <div class="template-card" data-template="js-function">
+                    ⚡ JavaScript Function
+                </div>
+                <div class="template-card" data-template="python-basic">
+                    🐍 Python أساسي
+                </div>
+            </div>
+        </div>
+        
+        <div class="editor-workspace" id="editorWorkspace">
+            <div class="code-panel">
+                <div class="panel-header">
+                    <span id="currentLanguage">HTML</span>
+                    <div class="panel-controls">
+                        <button class="panel-btn" id="minimapBtn" title="Toggle Minimap">📍</button>
+                        <button class="panel-btn" id="wrapBtn" title="Toggle Word Wrap">📄</button>
+                    </div>
+                </div>
+                <textarea id="codeEditor"></textarea>
+                <div class="minimap" id="minimap" style="display: none;">
+                    <div class="minimap-content" id="minimapContent"></div>
+                </div>
+            </div>
+            
+            <div class="output-panel" id="outputPanel">
+                <div class="resize-handle" id="resizeHandle"></div>
+                <div class="panel-header" id="outputPanelHeader">
+                    <span id="outputTitle">OUTPUT</span>
+                    <div class="panel-controls">
+                        <button class="panel-btn" id="clearOutputBtn" title="Clear Output">🗑️</button>
+                        <button class="panel-btn" id="collapseBtn" title="Collapse Panel">❌</button>
+                    </div>
+                </div>
+                <div id="outputContent" class="output-content"></div>
+                <iframe id="previewFrame" class="preview-frame" style="display: none;"></iframe>
+            </div>
+            
+            <!-- مناطق الإسقاط -->
+            <div class="drop-zone drop-zone-right" id="dropZoneRight"></div>
+            <div class="drop-zone drop-zone-bottom" id="dropZoneBottom"></div>
+            <div class="drop-zone drop-zone-center" id="dropZoneCenter"></div>
+        </div>
+        
+        <div class="status-bar">
+            <div class="status-left">
+                <span>Ln <span id="lineNumber">1</span>, Col <span id="columnNumber">1</span></span>
+                <span id="currentLanguage2">HTML</span>
+            </div>
+            <div class="status-right">
+                <span>Errors: <span class="error-count" id="errorCount">0</span></span>
+                <span>UTF-8</span>
+            </div>
+        </div>
+        
+        <!-- شريط البحث -->
+        <div class="search-box" id="searchBox">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search in code...">
+            <div class="search-results" id="searchResults"></div>
+        </div>
+        
+        <!-- Command Palette -->
+        <div class="command-palette" id="commandPalette">
+            <input type="text" class="command-input" id="commandInput" placeholder="Type a command...">
+            <div class="command-list" id="commandList">
+                <div class="command-item" data-command="run">
+                    <span>Run Code</span>
+                    <span class="command-shortcut">F5</span>
+                </div>
+                <div class="command-item" data-command="save">
+                    <span>Save File</span>
+                    <span class="command-shortcut">Ctrl+S</span>
+                </div>
+                <div class="command-item" data-command="format">
+                    <span>Format Document</span>
+                    <span class="command-shortcut">Shift+Alt+F</span>
+                </div>
+                <div class="command-item" data-command="search">
+                    <span>Find in File</span>
+                    <span class="command-shortcut">Ctrl+F</span>
+                </div>
+                <div class="command-item" data-command="clear">
+                    <span>Clear Editor</span>
+                    <span class="command-shortcut">Ctrl+K</span>
+                </div>
+                <div class="command-item" data-command="toggle-wrap">
+                    <span>Toggle Word Wrap</span>
+                    <span class="command-shortcut">Alt+Z</span>
+                </div>
+                <div class="command-item" data-command="toggle-minimap">
+                    <span>Toggle Minimap</span>
+                    <span class="command-shortcut">Ctrl+M</span>
+                </div>
+                <div class="command-item" data-command="move-console">
+                    <span>Toggle Console Position</span>
+                    <span class="command-shortcut">Ctrl+`</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- مكتبات CodeMirror -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/htmlmixed/htmlmixed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/closebrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/matchbrackets.min.js"></script>
+    
+    <!-- مكتبة JSHint للتحقق من أخطاء JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jshint/2.13.4/jshint.min.js"></script>
+    
+    <script src="code-editor.js"></script>
+    <script src="progress-integration.js"></script>
+</body>
+</html>
